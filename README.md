@@ -21,8 +21,8 @@ A feature-rich Discord bot built with **TypeScript** and the **Discord.js** libr
 ## Installation  
 1. Clone this repository:  
    ```bash  
-   git clone <repository-url>  
-   cd <repository-folder>
+   git clone <https://github.com/mockqv/TypeScript-Bot-Discord>  
+   cd <TypeScript-Bot-Discord>
    ```
 
 2. Install the dependencies:  
