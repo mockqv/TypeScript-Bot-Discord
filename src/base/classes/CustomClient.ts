@@ -5,8 +5,25 @@ import Handler from "./Handler";
 import Command from "./Command";
 import Subcommand from "./SubCommand";
 import { connect } from "mongoose";
+import dotenv from "dotenv"
+dotenv.config()
 
-export default class CustomClient extends Client implements ICustomClient{
+const config = {
+    token: process.env.TOKEN!,
+    discordClientId: process.env.DISCORD_CLIENT_ID!,
+    mongoUrl: process.env.MONGO_URL!,
+
+    devToken: process.env.DEV_TOKEN!,
+    devDiscordClientId: process.env.DEV_DISCORD_CLIENT_ID!,
+    devGuildId: process.env.DEV_GUILD_ID!,
+    devMongoUrl: process.env.DEV_MONGO_URL!,
+
+    developerUserIds: process.env.DEVELOPER_USER_IDS
+        ? process.env.DEVELOPER_USER_IDS.split(",")
+        : []
+};
+
+export default class CustomClient extends Client implements ICustomClient {
 
     handler: Handler;
     config: IConfig;
@@ -15,10 +32,11 @@ export default class CustomClient extends Client implements ICustomClient{
     cooldowns: Collection<string, Collection<string, number>>;
     developmentMode: boolean;
 
-    constructor(){
-        super({ intents: [ GatewayIntentBits.Guilds] });
+    constructor() {
+        super({ intents: [GatewayIntentBits.Guilds] });
 
-        this.config = require(`${process.cwd()}/data/config.json`);
+        // this.config = require(`${process.cwd()}/data/config.json`);
+        this.config = config;
         this.handler = new Handler(this);
         this.commands = new Collection();
         this.subCommands = new Collection();

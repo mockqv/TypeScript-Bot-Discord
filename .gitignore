@@ -6,3 +6,5 @@
 
 #TypeScript "compiled" files
 /build/
+
+.env
